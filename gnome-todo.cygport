@@ -12,5 +12,5 @@ src_install() {
 	cd ${B}
 	cyginstall
 
-	desktop-file-edit --remove-only-show-in=GNOME ${D}/usr/share/applications/*.desktop
+	desktop-file-edit --remove-key=OnlyShowIn ${D}/usr/share/applications/*.desktop
 }
