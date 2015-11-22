@@ -1,0 +1,16 @@
+inherit gnome2
+
+NAME="gnome-todo"
+VERSION=3.18.1
+RELEASE=1
+CATEGORY="GNOME"
+SUMMARY="GNOME task manager"
+DESCRIPTION="GNOME To Do is a simplistic personal task manager application
+designed to perfectly fit the GNOME desktop."
+
+src_install() {
+	cd ${B}
+	cyginstall
+
+	desktop-file-edit --remove-only-show-in=GNOME ${D}/usr/share/applications/*.desktop
+}
