@@ -1,0 +1,47 @@
+--- origsrc/gnome-todo-3.22.1/doc/reference/Makefile.am	2016-11-01 08:06:43.000000000 -0500
++++ src/gnome-todo-3.22.1/doc/reference/Makefile.am	2017-03-07 12:10:11.364146000 -0600
+@@ -105,8 +105,8 @@ GTKDOC_CFLAGS = \
+ 	$(GNOME_TODO_CFLAGS)
+ 
+ GTKDOC_LIBS = \
+-	$(GNOME_TODO_LIBS) \
+-	$(top_builddir)/src/libgtd.la
++	$(top_builddir)/src/libgtd.la \
++	$(GNOME_TODO_LIBS)
+ 
+ # This includes the standard gtk-doc make rules, copied by gtkdocize.
+ include $(top_srcdir)/gtk-doc.make
+--- origsrc/gnome-todo-3.22.1/src/Makefile.am	2016-12-19 18:22:57.000000000 -0600
++++ src/gnome-todo-3.22.1/src/Makefile.am	2017-03-07 12:00:52.065470000 -0600
+@@ -95,7 +95,7 @@ gnome_todo_CFLAGS = \
+ 	$(GNOME_TODO_WARN_CFLAGS)
+ 
+ gnome_todo_LDFLAGS = \
+-	-Wl,--export-dynamic \
++	-export-dynamic \
+ 	-Wl,--undefined=gtd_plugin_eds_register_types \
+ 	-Wl,--undefined=gtd_plugin_dark_theme_register_types \
+ 	-Wl,--undefined=gtd_plugin_scheduled_panel_register_types \
+@@ -104,11 +104,11 @@ gnome_todo_LDFLAGS = \
+ 	$(GNOME_TODO_WARN_LDFLAGS)
+ 
+ gnome_todo_LDADD = \
+-	$(GNOME_TODO_LIBS) \
+ 	$(top_builddir)/plugins/eds/libeds.la \
+ 	$(top_builddir)/plugins/dark-theme/libdarktheme.la \
+ 	$(top_builddir)/plugins/scheduled-panel/libscheduledpanel.la \
+-	$(top_builddir)/plugins/today-panel/libtodaypanel.la
++	$(top_builddir)/plugins/today-panel/libtodaypanel.la \
++	$(GNOME_TODO_LIBS)
+ 
+ gnome_todo_DEPENDENCIES = \
+ 	$(top_builddir)/plugins/eds/libeds.la \
+@@ -176,7 +176,7 @@ libgtd_la_CFLAGS = \
+ 	$(GNOME_TODO_WARN_CFLAGS)
+ 
+ libgtd_la_LDFLAGS = \
+-	-Wl,--export-dynamic \
++	-export-dynamic \
+ 	-lm
+ 
+ 

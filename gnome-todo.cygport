@@ -1,16 +1,45 @@
-inherit gnome2
+inherit gnome2 python3
 
 NAME="gnome-todo"
-VERSION=3.18.1
+VERSION=3.22.1
 RELEASE=1
 CATEGORY="GNOME"
 SUMMARY="GNOME task manager"
 DESCRIPTION="GNOME To Do is a simplistic personal task manager application
 designed to perfectly fit the GNOME desktop."
 
+PATCH_URI="
+	3.22-as-needed.patch
+	3.22-exeext.patch
+"
+
+PKG_NAMES=${NAME}
+gnome_todo_CONTENTS="
+	etc/postinstall/gnome-todo.sh
+	usr/bin/gnome-todo.exe
+	usr/lib/girepository-1.0/Gtd-1.0.typelib
+	usr/lib/gnome-todo/plugins/
+	usr/share/appdata/org.gnome.Todo.appdata.xml
+	usr/share/applications/org.gnome.Todo.desktop
+	usr/share/dbus-1/services/org.gnome.Todo.service
+	usr/share/doc/${NAME}/
+	usr/share/gir-1.0/Gtd-1.0.gir
+	usr/share/glib-2.0/schemas/org.gnome.todo.*
+	usr/share/icons/hicolor/*/apps/org.gnome.Todo*
+	usr/share/locale/*/LC_MESSAGES/gnome-todo.mo
+"
+gnome_todo_devel_CONTENTS="
+	usr/include/gnome-todo/
+	usr/lib/pkgconfig/gnome-todo.pc
+	usr/share/gtk-doc/html/gnome-todo/
+"
+PKG_IGNORE=${gnome_todo_devel_CONTENTS}
+
 src_install() {
 	cd ${B}
 	cyginstall
+
+	python3_optimize /usr/lib/gnome-todo
 
 	desktop-file-edit --remove-key=OnlyShowIn ${D}/usr/share/applications/*.desktop
 }
