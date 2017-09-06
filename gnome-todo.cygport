@@ -1,7 +1,7 @@
 inherit gnome2 python3
 
 NAME="gnome-todo"
-VERSION=3.22.1
+VERSION=3.24.2
 RELEASE=1
 CATEGORY="GNOME"
 SUMMARY="GNOME task manager"
@@ -25,6 +25,7 @@ gnome_todo_CONTENTS="
 	usr/share/doc/${NAME}/
 	usr/share/gir-1.0/Gtd-1.0.gir
 	usr/share/glib-2.0/schemas/org.gnome.todo.*
+	usr/share/gnome-todo/
 	usr/share/icons/hicolor/*/apps/org.gnome.Todo*
 	usr/share/locale/*/LC_MESSAGES/gnome-todo.mo
 "
