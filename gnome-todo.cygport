@@ -1,17 +1,12 @@
-inherit gnome2 python3
+inherit gnome.org python3 meson
 
 NAME="gnome-todo"
-VERSION=3.24.2
+VERSION=3.26.2
 RELEASE=1
 CATEGORY="GNOME"
 SUMMARY="GNOME task manager"
 DESCRIPTION="GNOME To Do is a simplistic personal task manager application
 designed to perfectly fit the GNOME desktop."
-
-PATCH_URI="
-	3.22-as-needed.patch
-	3.22-exeext.patch
-"
 
 PKG_NAMES=${NAME}
 gnome_todo_CONTENTS="
@@ -19,7 +14,6 @@ gnome_todo_CONTENTS="
 	usr/bin/gnome-todo.exe
 	usr/lib/girepository-1.0/Gtd-1.0.typelib
 	usr/lib/gnome-todo/plugins/
-	usr/share/appdata/org.gnome.Todo.appdata.xml
 	usr/share/applications/org.gnome.Todo.desktop
 	usr/share/dbus-1/services/org.gnome.Todo.service
 	usr/share/doc/${NAME}/
@@ -28,6 +22,7 @@ gnome_todo_CONTENTS="
 	usr/share/gnome-todo/
 	usr/share/icons/hicolor/*/apps/org.gnome.Todo*
 	usr/share/locale/*/LC_MESSAGES/gnome-todo.mo
+	usr/share/metainfo/org.gnome.Todo.appdata.xml
 "
 gnome_todo_devel_CONTENTS="
 	usr/include/gnome-todo/
@@ -37,8 +32,8 @@ gnome_todo_devel_CONTENTS="
 PKG_IGNORE=${gnome_todo_devel_CONTENTS}
 
 src_install() {
-	cd ${B}
-	cyginstall
+	cd ${S}
+	meson_install
 
 	python3_optimize /usr/lib/gnome-todo
 
